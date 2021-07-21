@@ -1,8 +1,8 @@
 /*
  * @Author: Yokee
  * @Date: 2020-11-29 10:40:36
- * @LastEditTime: 2020-11-29 11:48:43
- * @FilePath: \blog\src\router\index.js
+ * @LastEditTime: 2020-12-15 22:44:09
+ * @FilePath: \Ablog\src\router\index.js
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -36,23 +36,20 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-// const whitelist = ["/login"];
-// router.beforeEach((to, from, next) => {
-//   let user = store.state.user.user;
-//   if(user.isLogin){
+const whitelist = ["/login"];
+router.beforeEach((to, from, next) => {
+  let user = store.state.user.user;
+  if (whitelist.indexOf(to.path) > -1) {
+    next();
+    return
+  }
+  if (user.isLogin) {
+      next();
 
-//   }
-//   if (whitelist.indexOf(to.path) > -1) {
-//     next();
-//     return
-//   }
-//   if (user.isLogin) {
-//       next();
-
-//     } else {
-//       next("/404");
-//     }
-// });
+    } else {
+      next("/login");
+    }
+});
 
 
 export default router
