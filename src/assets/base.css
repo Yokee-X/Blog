@@ -1,0 +1,38 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --white: #ffffff;
+  --white-soft: #f8f8f8;
+  --white-mute: #f2f2f2;
+
+  ---black: #000000;
+  --black-soft: #333333;
+  --black-mute: #282828;
+
+
+  --divider-light-1: rgba(60, 60, 60, 0.29);
+  --divider-light-2: rgba(60, 60, 60, 0.12);
+  --divider-dark-1: rgba(84, 84, 84, 0.65);
+  --divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --text-light-1: var(--black-soft);
+  --text-light-2: rgba(60, 60, 60, 0.66);
+  --text-dark-1: var(--white-soft);
+  --text-dark-2: rgba(235, 235, 235, 0.64);
+}
+
+[data-theme='light']{
+  --bg-color: var(--white);
+  --text-color: var(--text-light-1);
+}
+[data-theme='dark']{
+  --bg-color: var(--black);
+  --text-color: var(--text-dark-1);
+}
+*{
+  padding: 0;
+  margin: 0;
+}
+body{
+  font-size: 12px;
+  
+}
