@@ -1,0 +1,11 @@
+@import './theme.scss';
+
+a{
+  @include useTheme{
+    color:getVar(link-color)
+  }
+}
+button{
+  background-color: getVar(button-background-color);
+  color: getVar(button-text-color);
+}
