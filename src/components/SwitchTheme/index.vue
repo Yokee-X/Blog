@@ -45,6 +45,7 @@ $roundSize: calc($size - 4px);
 
     @include useTheme {
         .sider {
+            cursor: pointer;
             position: relative;
             width: $size * 2;
             height: $size;

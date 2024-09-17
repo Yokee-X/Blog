@@ -1,21 +1,14 @@
 <template>
     <div class="header">
         <div class="header_main">
-            <img src="@/assets/logo_s.png" alt="Sap" class="logo" />
+            <a><img src="@/assets/logo_s.png" alt="Sap" class="logo" />
+            </a>
             <div class="nav">
                 <ul>
-                    <li>
-                        <a>首页</a>
+
+                    <li v-for="item in nav">
+                        <a :href="item.path">{{ item.label }}</a>
                     </li>
-                    <li>
-                        <a>技术</a>
-                    </li>
-                    <!-- <li>
-                        <a>待定</a>
-                    </li>
-                    <li>
-                        <a>待定</a>
-                    </li> -->
                 </ul>
             </div>
             <SwitchTheme />
@@ -25,7 +18,16 @@
 
 <script setup>
 import SwitchTheme from "../SwitchTheme/index.vue";
-
+const nav =[
+    {
+        label: '首页',
+        path: '/',
+    },
+    {
+        label: '技术',
+        path:'technology'
+    }
+]
 </script>
 
 <style scoped lang="scss">
@@ -44,6 +46,7 @@ import SwitchTheme from "../SwitchTheme/index.vue";
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
+
             .logo {
                 width: 60px;
                 height: 60px;

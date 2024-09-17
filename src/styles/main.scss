@@ -26,11 +26,9 @@ body {
     }
 }
 
-// a {
-//     @include useTheme {
-//         color: getVar(link-color);
-//     }
-// }
+a {
+   text-decoration: none;
+}
 button {
     @include useTheme {
         background-color: getVar(button-background-color);
