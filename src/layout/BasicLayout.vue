@@ -1,7 +1,7 @@
 <template>
     <Header />
     <RouterView />
-    <Pointer /> 
+    <!-- <Pointer />  -->
 </template>
 
 <script setup>

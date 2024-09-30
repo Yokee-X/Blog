@@ -20,7 +20,7 @@ body {
 #app {
     width: 100%;
     height: 100vh;
-    transition: all 0.3s;
+    transition: background 0.3s;
     @include useTheme {
         background-color: getVar(background-color);
     }
