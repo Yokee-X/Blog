@@ -21,6 +21,11 @@ const router = createRouter({
         }
       ]
     },
+    {
+      path: '/2048',
+      name: '2048',
+      component: () => import('../views/2048/index.vue')
+    }
   ]
 })
 
