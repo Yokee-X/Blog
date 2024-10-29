@@ -5,6 +5,7 @@ export default class Game2048 {
     rows = this.size;
     cols = this.size;
     direction = null;
+     moveFlag = false;//是否移动标志
     checkerboard = [
         // [0, 4, 8, 2],
         // [0, 0, 8, 4],
@@ -22,6 +23,29 @@ export default class Game2048 {
     }
     inRange(i, j) {
         return i >= 0 && i < this.size && j >= 0 && j < this.size;
+    }
+    gameover(){
+        if(this.checkerboard.every(row=>row.some(chunk=>chunk===0))) return false
+        for(let i = 0;i<this.size;i++){
+            a:for(let j = 0;j<this.size;j++){
+                if(this.inRange(...this.next['up'](i,j))){
+                    const [ni,nj] = this.next['up'](i,j)
+                    if(this.checkerboard[ni][nj] !== this.checkerboard[i][j]){
+                        continue a
+                    }else{
+                        return false
+                    }
+                }else if(this.inRange(...this.next['left'](i,j))){
+                    const [ni,nj] = this.next['left'](i,j)
+                    if(this.checkerboard[ni][nj] !== this.checkerboard[i][j]){
+                        continue a
+                    }else{
+                        return false
+                    }
+                }
+            }
+        }
+        return true
     }
     // 移动
     changeBoard(direction) {
@@ -47,7 +71,11 @@ export default class Game2048 {
     }
     move(direction){
         this.changeBoard(direction);
-        this.generateNum();
+        if(this.moveFlag){
+            this.generateNum();
+        }
+        this.moveFlag = false;
+        console.log(this.gameover(),'gameover');
     }
     generateNum() {
         // 类chunk使用
@@ -65,11 +93,9 @@ export default class Game2048 {
         }, []);
         if (emptyCells.length > 0) {
             let num = emptyCells.length > (this.size ** 2 / 2) ? 2 : 1;
-            console.log(num,'num');
             while (num--) {
                 let index = Math.floor(Math.random() * emptyCells.length);
                 const [i, j] = emptyCells[index];
-                console.log('gene',i,j)
                 this.checkerboard[i][j] = randomNumber();
             }
         }
@@ -104,10 +130,12 @@ export default class Game2048 {
 
         const curVal = this.checkerboard[i][j];
         if (curVal === 0) {
+            this.moveFlag = true
             this.checkerboard[i][j] = nextValue;
             this.checkerboard[ni][nj] = 0;
             this.cal(i, j);
         } else if (curVal === nextValue) {
+            this.moveFlag = true
             this.checkerboard[i][j] *= 2;
             this.checkerboard[ni][nj] = 0;
         }
