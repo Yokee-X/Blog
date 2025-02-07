@@ -20,26 +20,25 @@ export default class Game2048 {
     init() {
         this.checkerboard = Array.from({ length: this.size }, () => Array.from({ length: this.size }, () => 0));
         this.generateNum();
+        return this.checkerboard
     }
     inRange(i, j) {
         return i >= 0 && i < this.size && j >= 0 && j < this.size;
     }
     gameover(){
-        if(this.checkerboard.every(row=>row.some(chunk=>chunk===0))) return false
+        if(this.checkerboard.some(row=>row.some(chunk=>chunk===0)))  return false
+        
         for(let i = 0;i<this.size;i++){
-            a:for(let j = 0;j<this.size;j++){
+            for(let j = 0;j<this.size;j++){
                 if(this.inRange(...this.next['up'](i,j))){
                     const [ni,nj] = this.next['up'](i,j)
-                    if(this.checkerboard[ni][nj] !== this.checkerboard[i][j]){
-                        continue a
-                    }else{
+                    if(this.checkerboard[ni][nj] == this.checkerboard[i][j]){
                         return false
                     }
-                }else if(this.inRange(...this.next['left'](i,j))){
+                }
+                if(this.inRange(...this.next['left'](i,j))){
                     const [ni,nj] = this.next['left'](i,j)
-                    if(this.checkerboard[ni][nj] !== this.checkerboard[i][j]){
-                        continue a
-                    }else{
+                    if(this.checkerboard[ni][nj] == this.checkerboard[i][j]){
                         return false
                     }
                 }
@@ -75,7 +74,7 @@ export default class Game2048 {
             this.generateNum();
         }
         this.moveFlag = false;
-        console.log(this.gameover(),'gameover');
+        return this.gameover()
     }
     generateNum() {
         // 类chunk使用
